@@ -2,11 +2,10 @@ resource "null_resource" "Moodle-Execution" {
   
     connection {
     type = "ssh"
-    host = aws_instance.example.public_ip
+    host = aws_instance.bhanu-moodle-instance.public_ip
     user = "ubuntu"
-    private_key = "${tls_private_key.example.private_key_pem}"
-    }
-
+    private_key = file("bhanu-key") 
+}
  
   provisioner "file" {
     source      = "moodle.sh"
@@ -20,6 +19,6 @@ resource "null_resource" "Moodle-Execution" {
     ]
   }
 
-  depends_on = [ aws_instance.example ]
+  depends_on = [ aws_instance.bhanu-moodle-instance ]
 
   }
